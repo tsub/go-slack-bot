@@ -1,6 +1,6 @@
 # go-slack-bot
 
-A sample of Slack bot written by Go.
+A sample of Slack bot written in Go.
 
 ## Usage
 
