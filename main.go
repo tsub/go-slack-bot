@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log"
 	"os"
 
 	"github.com/lestrrat/go-slack"
@@ -17,8 +17,7 @@ func main() {
 
 	authers, err := cl.Auth().Test().Do(ctx)
 	if err != nil {
-		fmt.Printf("failed to test authentication: %s\n", err)
-		return
+		log.Fatalf("failed to test authentication: %s\n", err)
 	}
 	botID := authers.UserID
 

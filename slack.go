@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log"
 	"strings"
 
 	"github.com/lestrrat/go-slack"
@@ -32,7 +32,7 @@ func (s SlackListener) ListenAndResponse() {
 		switch typ := e.Type(); typ {
 		case rtm.MessageType:
 			if err := s.handleMessageEvent(ctx, e.Data().(*rtm.MessageEvent)); err != nil {
-				fmt.Printf("[ERROR] Failed to handle message: %s\n", err)
+				log.Printf("[ERROR] Failed to handle message: %s\n", err)
 			}
 		default:
 			// Noop
@@ -46,7 +46,7 @@ func (s SlackListener) handleMessageEvent(ctx context.Context, e *rtm.MessageEve
 		return nil
 	}
 
-	fmt.Printf("Mention event: %s\n", e)
+	log.Printf("Mention event: %s\n", e)
 
 	if strings.Contains(e.Text, "hi") {
 		res, err := s.Client.Chat().PostMessage(e.Channel).Text("hi").Do(ctx)
@@ -54,7 +54,7 @@ func (s SlackListener) handleMessageEvent(ctx context.Context, e *rtm.MessageEve
 			return err
 		}
 
-		fmt.Printf("Chat response: %s\n", res)
+		log.Printf("Chat response: %s\n", res)
 	}
 
 	return nil
