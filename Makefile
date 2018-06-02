@@ -10,6 +10,10 @@ build:
 	go build -o build/$(PROJECT)
 .PHONY: build
 
+run: build
+	build/$(PROJECT)
+.PHONY: run
+
 test:
 	go test $(SRC) $(TESTARGS)
 .PHONY: test
